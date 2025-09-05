@@ -5,70 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Employee Details Form</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f6f9; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    .form-container { background: #fff; padding: 20px 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 350px; }
-    h2 { text-align: center; margin-bottom: 20px; }
-    label { font-weight: bold; display: block; margin-top: 10px; }
-    input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
-    button { width: 100%; padding: 10px; margin-top: 20px; background: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #0056b3; }
-    .message { text-align: center; margin-top: 15px; font-weight: bold; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      padding: 20px;
+    }
+    h2 {
+      color: #333;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      max-width: 400px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background: #28a745;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Employee Details</h2>
-    <form id="employeeForm">
-      <label>Employee Name</label>
-      <input type="text" name="EmployeeName" required>
+  <h2>Employee Details Form</h2>
+  <form id="employeeForm">
+    <label>Employee Name:</label>
+    <input type="text" name="EmployeeName" required>
 
-      <label>Employee Code</label>
-      <input type="text" name="EmployeeCode" required>
+    <label>Employee Code:</label>
+    <input type="text" name="EmployeeCode" required>
 
-      <label>Age</label>
-      <input type="number" name="Age" required>
+    <label>Age:</label>
+    <input type="number" name="Age" required>
 
-      <label>Blood Group</label>
-      <select name="BloodGroup" required>
-        <option value="">Select</option>
-        <option>O+</option>
-        <option>O-</option>
-        <option>A+</option>
-        <option>A-</option>
-        <option>B+</option>
-        <option>B-</option>
-        <option>AB+</option>
-        <option>AB-</option>
-      </select>
+    <label>Blood Group:</label>
+    <input type="text" name="BloodGroup" required>
 
-      <label>Location</label>
-      <input type="text" name="Location" required>
+    <label>Location:</label>
+    <input type="text" name="Location" required>
 
-      <label>Contact Number</label>
-      <input type="text" name="ContactNumber" required>
+    <label>Contact Number:</label>
+    <input type="text" name="ContactNumber" required>
 
-      <button type="submit">Submit</button>
-    </form>
-    <div class="message" id="responseMsg"></div>
-  </div>
+    <button type="submit">Submit</button>
+  </form>
 
   <script>
-    document.getElementById("employeeForm").addEventListener("submit", function(e){
+    document.getElementById("employeeForm").addEventListener("submit", function(e) {
       e.preventDefault();
+
       const formData = new FormData(this);
+
       fetch("https://script.google.com/macros/s/AKfycbyvW7kl3n8Vs6ceWg4V-dGbAffVw08ywTG-DdkHSwn8AWh8SCPMLPE94MbNZegAq4hk/exec", {
         method: "POST",
         body: formData
       })
       .then(response => response.text())
       .then(data => {
-        document.getElementById("responseMsg").innerText = "Form submitted successfully!";
-        document.getElementById("responseMsg").style.color = "green";
+        alert("Form submitted successfully!");
         document.getElementById("employeeForm").reset();
       })
       .catch(error => {
-        document.getElementById("responseMsg").innerText = "Error submitting form.";
-        document.getElementById("responseMsg").style.color = "red";
+        console.error("Error!", error);
+        alert("Error submitting form.");
       });
     });
   </script>
