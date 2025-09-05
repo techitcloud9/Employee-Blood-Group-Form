@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Details Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      padding: 20px;
+    }
+    h2 {
+      color: #333;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      max-width: 400px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background: #28a745;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h2>Employee Details Form</h2>
+  <form id="employeeForm">
+    <label>Employee Name:</label>
+    <input type="text" name="EmployeeName" required>
+
+    <label>Employee Code:</label>
+    <input type="text" name="EmployeeCode" required>
+
+    <label>Age:</label>
+    <input type="number" name="Age" required>
+
+    <label>Blood Group:</label>
+    <input type="text" name="BloodGroup" required>
+
+    <label>Location:</label>
+    <input type="text" name="Location" required>
+
+    <label>Contact Number:</label>
+    <input type="text" name="ContactNumber" required>
+
+    <label>Password:</label>
+    <input type="password" name="FormPassword" required>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("employeeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+
+      fetch("https://script.google.com/macros/s/AKfycbyvW7kl3n8Vs6ceWg4V-dGbAffVw08ywTG-DdkHSwn8AWh8SCPMLPE94MbNZegAq4hk/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        if (data.includes("Unauthorized")) {
+          alert("Invalid password! Access denied.");
+        } else {
+          alert("Form submitted successfully!");
+          document.getElementById("employeeForm").reset();
+        }
+      })
+      .catch(error => {
+        console.error("Error!", error);
+        alert("Error submitting form.");
+      });
+    });
+  </script>
+</body>
+</html>
